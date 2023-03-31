@@ -1,15 +1,19 @@
-
 #!/usr/bin/python3
 """
-list 10 commits (from the most recent to oldest) of the repository and user
-sent in as arguments
+Holberton School staff evaluates candidates applying
+for a back-end position with multiple technical challenges
 """
-if __name__ == '__main__':
-    import requests
-    from sys import argv
+from sys import argv
+import requests
+
+
+if __name__ == "__main__":
     r = requests.get('https://api.github.com/repos/{}/{}/commits'
                      .format(argv[2], argv[1]))
-    commits = r.json()
-    for commit in commits[:10]:
-        print(commit.get('sha'), end=': ')
-        print(commit.get('commit').get('author').get('name'))
+    l = r.json()
+    try:
+        for i in range(10):
+            print(l[i].get('sha'), l[i].get('commit')
+                  .get('author').get('name'), sep=": ")
+    except:
+        pass
